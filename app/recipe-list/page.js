@@ -1,4 +1,4 @@
-import RecipeList from "@/components/ui/recipe-list/recipeList";
+import RecipeList from "@/components/ui/recipe-list/RecipeList";
 import Link from "next/link";
 
 async function fetchListofRecipes(){
