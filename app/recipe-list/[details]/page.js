@@ -24,7 +24,9 @@ export default async function RecipeDetailsPage({ params }) {
 
   if (!getRecipeDetails) return (
     <div className="h-screen flex items-center justify-center">
-      <Link href="/recipe-list" className="text-orange-500 underline">Recipe not found. Go back.</Link>
+      <Link href="/recipe-list" className="text-orange-500 underline">
+        {`Recipe not found. Go back.`}
+      </Link>
     </div>
   );
 
@@ -52,9 +54,10 @@ export default async function RecipeDetailsPage({ params }) {
 
       {/* Magazine Hero Section */}
       <header className="relative w-full h-[65vh] overflow-hidden">
+        {/* Note: I added a simple alt text fix here too */}
         <img 
           src={getRecipeDetails.image} 
-          alt={getRecipeDetails.name} 
+          alt={getRecipeDetails.name || "Recipe Image"} 
           className="w-full h-full object-cover scale-105" 
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-[#FBFBFA]" />
@@ -74,9 +77,9 @@ export default async function RecipeDetailsPage({ params }) {
               {getRecipeDetails.name}
             </h1>
             <div className="flex items-center justify-center gap-6 text-sm font-bold text-gray-400 uppercase tracking-widest">
-              <span>★ {getRecipeDetails.rating}</span>
+              <span>{`★ ${getRecipeDetails.rating}`}</span>
               <div className="w-1.5 h-1.5 bg-orange-400 rounded-full" />
-              <span>{getRecipeDetails.caloriesPerServing} Calories</span>
+              <span>{`${getRecipeDetails.caloriesPerServing} Calories`}</span>
             </div>
           </div>
         </div>

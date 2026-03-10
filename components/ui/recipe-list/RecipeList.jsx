@@ -1,10 +1,5 @@
 import Link from "next/link";
-import { Card, CardContent } from "@/components/ui/card";
-import { Search, Filter, SlidersHorizontal } from "lucide-react";
-
-// Add these to your layout or global CSS for the "Pro" look:
-// font-serif: 'Playfair Display'
-// font-sans: 'Inter'
+import { Search, SlidersHorizontal } from "lucide-react";
 
 export default function RecipeList({ recipeList }) {
   return (
@@ -13,10 +8,11 @@ export default function RecipeList({ recipeList }) {
       <header className="pt-24 pb-12 px-6">
         <div className="max-w-7xl mx-auto text-center">
           <span className="text-orange-500 font-black text-[10px] uppercase tracking-[0.3em] mb-4 block">
-            Handpicked Collections
+            {`Handpicked Collections`}
           </span>
           <h2 className="text-5xl md:text-7xl font-serif font-black text-gray-900 mb-8 tracking-tight">
-            Our <span className="italic text-gray-400">Recipes</span>
+            {`Our `}
+            <span className="italic text-gray-400">{`Recipes`}</span>
           </h2>
           
           {/* Pro Search Bar */}
@@ -32,7 +28,7 @@ export default function RecipeList({ recipeList }) {
             <div className="absolute inset-y-2 right-2">
               <button className="h-full px-6 bg-gray-900 text-white rounded-full flex items-center gap-2 hover:bg-orange-600 transition-all active:scale-95">
                 <SlidersHorizontal className="w-4 h-4" />
-                <span className="text-xs font-bold uppercase tracking-widest hidden sm:block">Filters</span>
+                <span className="text-xs font-bold uppercase tracking-widest hidden sm:block">{`Filters`}</span>
               </button>
             </div>
           </div>
@@ -43,12 +39,12 @@ export default function RecipeList({ recipeList }) {
       <main className="px-6 max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-10 border-b border-gray-100 pb-6">
           <div className="flex gap-8">
-            <button className="text-sm font-black uppercase tracking-widest text-gray-900 border-b-2 border-orange-500 pb-1">All</button>
-            <button className="text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-gray-900 transition-colors">Popular</button>
-            <button className="text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-gray-900 transition-colors">Newest</button>
+            <button className="text-sm font-black uppercase tracking-widest text-gray-900 border-b-2 border-orange-500 pb-1">{`All`}</button>
+            <button className="text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-gray-900 transition-colors">{`Popular`}</button>
+            <button className="text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-gray-900 transition-colors">{`Newest`}</button>
           </div>
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest hidden md:block">
-            {recipeList?.length || 0} Curated Dishes
+            {`${recipeList?.length || 0} Curated Dishes`}
           </p>
         </div>
 
@@ -71,7 +67,7 @@ export default function RecipeList({ recipeList }) {
                           {recipe.cuisine}
                         </span>
                         <div className="flex items-center gap-1">
-                          <span className="text-yellow-500 text-xs">★</span>
+                          <span className="text-yellow-500 text-xs">{`★`}</span>
                           <span className="text-xs font-black text-gray-900">{recipe.rating}</span>
                         </div>
                       </div>
@@ -89,7 +85,7 @@ export default function RecipeList({ recipeList }) {
                       </span>
                       <span className="w-1 h-1 bg-gray-200 rounded-full" />
                       <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                        {recipe.caloriesPerServing} kcal
+                        {`${recipe.caloriesPerServing} kcal`}
                       </span>
                     </div>
                   </div>
@@ -98,7 +94,9 @@ export default function RecipeList({ recipeList }) {
             ))
           ) : (
             <div className="col-span-full py-32 text-center">
-              <p className="text-2xl font-serif italic text-gray-400">Empty kitchen... try searching for something else.</p>
+              <p className="text-2xl font-serif italic text-gray-400">
+                {`Empty kitchen... try searching for something else.`}
+              </p>
             </div>
           )}
         </div>
