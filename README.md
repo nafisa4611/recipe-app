@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🍳 Kitchen. | A Premium Culinary Experience
 
-## Getting Started
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**Kitchen.** is a high-end, editorial-style recipe discovery application. Built with a focus on "Gastronomy as Art," this app replaces cluttered, ad-heavy recipe sites with a clean, magazine-inspired interface that makes cooking a calm and enjoyable experience.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## ✨ Key Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* **📖 Magazine Layout:** A sophisticated mix of Serif and Sans-serif typography for a premium look.
+* **🖼️ Immersive Visuals:** High-resolution hero sections with soft parallax effects and "Glassmorphism" overlays.
+* **📱 Mobile-First Design:** A floating, blurred navigation system optimized for one-handed use in the kitchen.
+* **⏱️ Kitchen Utility:** Sticky ingredient sidebars and oversized step numbering for easy reading while cooking.
+* **⚡ High Performance:** Built using Next.js 15 Server Components for instant data fetching and caching.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Technical Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Tech | Purpose |
+| :--- | :--- |
+| **Next.js 15** | Framework & App Routing |
+| **Tailwind CSS** | Styling & Magazine-style Layouts |
+| **Lucide React** | Minimalist Iconography |
+| **Google Fonts** | Playfair Display & Inter |
+| **DummyJSON API** | Recipe Data Source |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📸 Screenshots
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+* Node.js 18.x or later
+* npm or yarn
+
+### Installation
+
+1. **Clone the repo**
+   ```bash
+   git clone [https://github.com/yourusername/recipe-app.git](https://github.com/yourusername/recipe-app.git)
