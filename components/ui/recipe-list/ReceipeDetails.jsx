@@ -1,4 +1,4 @@
-import { Clock, Users, Flame, ChevronRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
 
 export default function ReceipeDetails({ getRecipeDetails }) {
   if (!getRecipeDetails) return null;

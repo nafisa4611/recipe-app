@@ -67,9 +67,9 @@ export default async function RecipeListPage() {
                 <span className="italic text-orange-400">{`Something Else?`}</span>
               </h3>
               <p className="text-gray-400 text-lg mb-10 max-w-lg mx-auto leading-relaxed">
-                {`If our curated list doesn't have what you're looking for, let us know.`}
+                {`If our curated list does not have what you are looking for, let us know.`}
                 <br />
-                {`We're adding global flavors every week.`}
+                {`We are adding global flavors every week.`}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button className="flex items-center justify-center gap-2 px-8 py-4 bg-orange-500 text-white font-black uppercase text-xs tracking-[0.2em] rounded-2xl hover:bg-white hover:text-gray-900 transition-all shadow-xl">

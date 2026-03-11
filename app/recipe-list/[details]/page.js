@@ -2,6 +2,7 @@ import ReceipeDetails from "@/components/ui/recipe-list/ReceipeDetails";
 import Link from "next/link";
 import { ArrowLeft, Home, Share2, Heart } from "lucide-react";
 
+
 import { Playfair_Display, Inter } from 'next/font/google';
 
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' });
