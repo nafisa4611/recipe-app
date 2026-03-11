@@ -1,5 +1,5 @@
-import "./globals.css"; // Ensure your Tailwind styles are here
-import Navbar from "@/components/Navbar"; // Adjust the path to where your Navbar is
+import "./globals.css"; 
+import Navbar from "@/components/Navbar"; 
 import { Playfair_Display, Inter } from 'next/font/google';
 
 const playfair = Playfair_Display({ 
@@ -22,7 +22,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
-      <body className="antialiased bg-[#FBFBFA]">
+      <body className="antialiased bg-background text-foreground dark:bg-background dark:text-foreground">
         <Navbar />
         {/* We add a padding-top here (pt-20) so content doesn't hide under the fixed Navbar */}
         <div className="pt-20">

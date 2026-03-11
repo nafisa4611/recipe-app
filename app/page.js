@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export default function Home() {
   return (
-    <div className={`${inter.variable} ${playfair.variable} font-sans min-h-screen bg-[#FBFBFA] text-gray-900`}>
+    <div className={`${inter.variable} ${playfair.variable} font-sans min-h-screen  dark:bg-gray-900/70 dark:border-gray-800 bg-[#FBFBFA] text-gray-900 dark:text-gray-200`}>
 
       {/* Hero Section: The Statement Piece */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">

@@ -28,7 +28,7 @@ export default async function RecipeListPage() {
   const recipeList = await fetchListofRecipes();
 
   return (
-    <main className={`${inter.variable} ${playfair.variable} font-sans min-h-screen bg-[#FBFBFA]`}>
+    <main className={`${inter.variable} ${playfair.variable} font-sans min-h-screen bg-[#FBFBFA] dark:bg-background dark:text-foreground text-gray-900`}>
       {/* Editorial Navigation */}
       <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">

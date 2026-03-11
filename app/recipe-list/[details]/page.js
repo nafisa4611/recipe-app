@@ -1,95 +1,79 @@
+"use client";
+
+import { useEffect, useState, use } from "react"; // Added 'use'
 import ReceipeDetails from "@/components/ui/recipe-list/ReceipeDetails";
 import Link from "next/link";
 import { ArrowLeft, Home, Share2, Heart } from "lucide-react";
+import useFavorites from "@/hooks/useFavorites";
 
-
-import { Playfair_Display, Inter } from 'next/font/google';
-
-const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' });
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
-
-async function fetchRecipeDetails(currentRecipeId) {
-  try {
-    const apiResponse = await fetch(`https://dummyjson.com/recipes/${currentRecipeId}`, {
-      next: { revalidate: 3600 } 
-    });
-    return apiResponse.ok ? await apiResponse.json() : null;
-  } catch (e) {
-    return null;
-  }
+// Better fetch with error handling
+async function fetchRecipeDetails(id) {
+  const res = await fetch(`https://dummyjson.com/recipes/${id}`);
+  if (!res.ok) return null;
+  return res.json();
 }
 
-export default async function RecipeDetailsPage({ params }) {
-  const { details } = await params;
-  const getRecipeDetails = await fetchRecipeDetails(details);
+export default function RecipeDetailsPage({ params }) {
+  // Unwrap params using React's 'use' hook for Next.js 15
+  const resolvedParams = use(params); 
+  const { favorites, toggleFavorite } = useFavorites();
+  const [recipe, setRecipe] = useState(null);
 
-  if (!getRecipeDetails) return (
-    <div className="h-screen flex items-center justify-center">
-      <Link href="/recipe-list" className="text-orange-500 underline">
-        {`Recipe not found. Go back.`}
-      </Link>
+  useEffect(() => {
+    if (resolvedParams.details) { // Check for your folder name [details]
+      fetchRecipeDetails(resolvedParams.details).then(setRecipe);
+    }
+  }, [resolvedParams.details]);
+
+  if (!recipe) return (
+    <div className="h-screen flex items-center justify-center font-serif italic text-gray-400">
+      Loading your culinary masterpiece...
     </div>
   );
 
   return (
-    <div className={`${inter.variable} ${playfair.variable} font-sans min-h-screen bg-[#FBFBFA] pb-20`}>
-      
-      {/* Floating Modern Navigation */}
-      <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-[90%] max-w-4xl">
-        <div className="bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.05)] rounded-3xl px-6 py-3 flex items-center justify-between">
-          <Link href="/recipe-list" className="group flex items-center gap-2 font-bold text-gray-800">
-            <div className="p-2 bg-gray-50 rounded-xl group-hover:bg-orange-500 group-hover:text-white transition-all">
-              <ArrowLeft className="w-4 h-4" />
-            </div>
-            <span className="text-xs uppercase tracking-widest hidden sm:block">Back</span>
+    <div className="min-h-screen pb-20 dark:bg-background dark:text-foreground bg-[#FBFBFA] text-gray-900">
+      {/* Navigation */}
+      <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-[90%] max-w-4xl flex justify-between items-center bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-3xl px-6 py-3 shadow-lg border border-white/20">
+        <Link href="/recipe-list" className="flex items-center gap-2 font-bold text-gray-800 dark:text-gray-100 hover:text-orange-500 transition-colors">
+          <ArrowLeft className="w-4 h-4" />
+          <span className="text-xs uppercase tracking-widest">{`Back`}</span>
+        </Link>
+
+        <div className="flex items-center gap-3">
+          <button onClick={() => toggleFavorite(recipe)} className="p-2 hover:scale-110 transition-transform">
+            <Heart
+              className={`w-6 h-6 ${
+                favorites.find((f) => f.id === recipe.id)
+                  ? "fill-red-500 text-red-500"
+                  : "text-gray-400 dark:text-gray-300"
+              }`}
+            />
+          </button>
+          <button className="p-2 hover:text-blue-500">
+            <Share2 className="w-5 h-5 text-gray-400 dark:text-gray-300" />
+          </button>
+          <Link href="/" className="p-2 hover:text-orange-500">
+            <Home className="w-5 h-5 text-gray-800 dark:text-gray-100" />
           </Link>
-          
-          <div className="flex items-center gap-3">
-            <button className="p-2 text-gray-400 hover:text-red-500 transition-colors"><Heart className="w-5 h-5" /></button>
-            <button className="p-2 text-gray-400 hover:text-blue-500 transition-colors"><Share2 className="w-5 h-5" /></button>
-            <div className="w-px h-4 bg-gray-200 mx-1"></div>
-            <Link href="/" className="p-2 text-gray-800 hover:text-orange-500"><Home className="w-5 h-5" /></Link>
-          </div>
         </div>
       </nav>
 
-      {/* Magazine Hero Section */}
+      {/* Hero */}
       <header className="relative w-full h-[65vh] overflow-hidden">
-        {/* Note: I added a simple alt text fix here too */}
         <img 
-          src={getRecipeDetails.image} 
-          alt={getRecipeDetails.name || "Recipe Image"} 
-          className="w-full h-full object-cover scale-105" 
+          src={recipe.image} 
+          alt={recipe.name || "Recipe"} 
+          className="w-full h-full object-cover animate-in fade-in zoom-in-105 duration-1000" 
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-[#FBFBFA]" />
-        
-        {/* Overlapping Header Card */}
-        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-[92%] max-w-5xl">
-          <div className="bg-white rounded-t-[3rem] p-8 md:p-16 text-center shadow-sm border-x border-t border-gray-50">
-            <div className="flex justify-center gap-3 mb-6">
-              <span className="px-4 py-1 rounded-full bg-orange-100 text-orange-700 text-[10px] font-black uppercase tracking-tighter">
-                {getRecipeDetails.cuisine}
-              </span>
-              <span className="px-4 py-1 rounded-full bg-gray-100 text-gray-600 text-[10px] font-black uppercase tracking-tighter">
-                {getRecipeDetails.difficulty}
-              </span>
-            </div>
-            <h1 className="font-serif text-5xl md:text-7xl text-gray-900 leading-[1.1] mb-6 tracking-tight">
-              {getRecipeDetails.name}
-            </h1>
-            <div className="flex items-center justify-center gap-6 text-sm font-bold text-gray-400 uppercase tracking-widest">
-              <span>{`★ ${getRecipeDetails.rating}`}</span>
-              <div className="w-1.5 h-1.5 bg-orange-400 rounded-full" />
-              <span>{`${getRecipeDetails.caloriesPerServing} Calories`}</span>
-            </div>
-          </div>
-        </div>
+        {/* Added overlay for better text contrast */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-[#FBFBFA] dark:to-background" />
       </header>
 
-      {/* Main Content Area */}
+      {/* Details */}
       <main className="max-w-6xl mx-auto px-6 mt-12">
-        <div className="bg-white rounded-b-[3rem] p-8 md:p-16 -mt-1 shadow-sm border-x border-b border-gray-50">
-           <ReceipeDetails getRecipeDetails={getRecipeDetails} />
+        <div className="bg-white dark:bg-gray-900 rounded-[3rem] p-8 md:p-16 shadow-xl border border-gray-100 dark:border-gray-800 -mt-32 relative z-10">
+          <ReceipeDetails getRecipeDetails={recipe} />
         </div>
       </main>
     </div>
